@@ -26,7 +26,33 @@ npm i
 npm run build
 ```
 
-### Run
+### Run server
 ```
 npm run server:start
+```
+
+### Migrations
+```
+# package.json
+# $npm_config_name: tên mặc định đặt trong file package.json để cấu hình option tham số khi run command generate migration
+# Khi chạy lệnh truyền vào option `npm run typeorm:generate --name=...`
+"typeorm:generate": "npm run typeorm -- -d ./src/config/data-source.ts migration:generate ./src/migration/$npm_config_name"
+
+# VD: Run command generate migration
+npm run typeorm:generate --name=create_user_table
+```
+
+**Generate migration**
+```
+npm run typeorm:generate --name=migration_name
+```
+
+**Apply migration**
+```
+npm run typeorm:run
+```
+
+**Revert previous migration**
+```
+npm run typeorm:revert
 ```
