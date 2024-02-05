@@ -1,8 +1,19 @@
 import http from 'http'
 import debug from 'debug'
+import 'dotenv/config'
 
 import app from './server'
 import route from './routes'
+import { AppDataSource } from './config/data-source'
+
+// Connect DB
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Datasource has been initialized')
+  })
+  .catch((err) => {
+    console.error('Error during Datasource initialization: ', err)
+  })
 
 app.use('', route)
 
