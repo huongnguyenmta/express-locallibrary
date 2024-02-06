@@ -1,15 +1,18 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import authorRouter from './author.route'
+import bookRouter from './book.route'
+import bookInstanceRouter from './book_instance.route'
 
 const router: Router = Router()
 
-// routes/index.js
 // how that route renders a response using the template "index" passing the template variable "title".
 /* GET home page. */
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.render('index', { title: 'Express' })
 })
-
+// ...
 router.use('/authors', authorRouter)
+router.use('/books', bookRouter)
+router.use('/book_instances', bookInstanceRouter)
 
 export default router
