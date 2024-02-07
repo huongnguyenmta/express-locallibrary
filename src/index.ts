@@ -1,6 +1,6 @@
 import http from 'http'
 import debug from 'debug'
-// import 'dotenv/config'
+import 'dotenv/config'
 
 import app from './server'
 import route from './routes'

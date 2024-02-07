@@ -5,7 +5,6 @@ import * as bookController from '../controller/book.controller'
 
 const router: Router = Router()
 
-/* GET users listing. */
 router.get('/', bookController.bookList)
 router.get('/:id', bookController.bookDetail)
 router.get('/new', bookController.bookCreateGet)
