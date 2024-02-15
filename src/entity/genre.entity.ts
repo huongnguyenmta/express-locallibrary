@@ -7,4 +7,8 @@ export class Genre {
 
   @Column()
   name: string
+
+  get url(): string {
+    return `genres/${this.id}`
+  }
 }

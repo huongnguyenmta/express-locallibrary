@@ -21,4 +21,12 @@ export class Author {
 
   @OneToMany(() => Book, (book) => book.author)
   books: Book[]
+
+  get url(): string {
+    return `authors/${this.id}`
+  }
+
+  get fullName(): string {
+    return `${this.firstName}, ${this.familyName}`
+  }
 }

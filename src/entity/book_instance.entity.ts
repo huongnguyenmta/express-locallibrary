@@ -23,4 +23,8 @@ export class BookInstance {
 
   @ManyToOne(() => Book, (book) => book.bookInstances)
   book: Book
+
+  get url(): string {
+    return `book_instances/${this.id}`
+  }
 }
