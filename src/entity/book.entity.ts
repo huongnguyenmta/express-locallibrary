@@ -27,4 +27,8 @@ export class Book {
   @ManyToMany(() => Genre)
   @JoinTable()
   genres: Genre[]
+
+  get url(): string {
+    return `books/${this.id}`
+  }
 }

@@ -34,13 +34,37 @@ export const index = asyncHandler(async (req: Request, res: Response, next: Next
   })
 })
 
+// src/controller/book.controller.ts
 export const bookList = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  res.send('NOT IMPLEMENTED: book list')
+  const books = await bookRepository.find({
+    order: { title: 'ASC' },
+    relations: ['author']
+  })
+
+  res.render('books/index', { books, title: 'List of books' })
 })
 
 // Display detail page for a specific book.
 export const bookDetail = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  res.send(`NOT IMPLEMENTED: book detail: ${req.params.id}`)
+  const id = parseInt(req.params.id)
+  if (isNaN(id)) {
+    // log 404 Invalid book ID parameter
+  }
+
+  const book = await bookRepository.findOne({
+    relations: ['author', 'genres', 'bookInstances'],
+    where: { id: id }
+  })
+  if (book === null) {
+    // log 404 Book not found
+  }
+
+  res.render('books/show', {
+    book,
+    bookInstances: book?.bookInstances,
+    bookGenres: book?.genres,
+    bookInstanceStatuses: BookInstanceStatus
+  })
 })
 
 export const bookCreateGet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
